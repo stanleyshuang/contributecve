@@ -21,7 +21,10 @@ fi
 ###    against master otherwise future branches may include work from other 
 ###    local branches:
 
-git branch $YOUR_BRANCH master
+git show-ref --verify --quiet refs/heads/$YOUR_BRANCH
+if [[ $? != 0 ]]; then
+  git branch $YOUR_BRANCH master
+fi
 git checkout $YOUR_BRANCH
 
 ### 4. Commit your changes (eg, git commit -av) and, if necessary, push your 
